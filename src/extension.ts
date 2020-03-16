@@ -1,16 +1,16 @@
 import {
   window,
-  workspace,
   commands,
   ExtensionContext,
   Range,
   TextEditor,
   Selection,
 } from 'vscode';
-import { Md5Command } from './md5-command';
-import { Sha1Command } from './sha1-command';
+import { HashCommand } from './hash-command';
 import { Base64EncodeCommand } from './base64-encode-command';
 import { Base64DecodeCommand } from './base64-decode-command';
+import { Base64UrlEncodeCommand } from './base64url-encode-command';
+import { Base64UrlDecodeCommand } from './base64url-decode-command';
 import { UriEncodeComponentCommand } from './uri-encode-component-command';
 import { UriDecodeComponentCommand } from './uri-decode-component-command';
 import { UuidV1Command } from './uuid-v1-command';
@@ -23,7 +23,7 @@ export function activate(context: ExtensionContext) {
     commands.registerCommand('extension.md5', () => {
       let editor = getActiveEditor();
       let selected = getSelectedTextAndRange(editor);
-      let md5 = new Md5Command();
+      let md5 = new HashCommand('md5');
       replaceText(editor, selected.range, md5.run(selected.text));
     })
   );
@@ -32,7 +32,25 @@ export function activate(context: ExtensionContext) {
     commands.registerCommand('extension.sha1', () => {
       let editor = getActiveEditor();
       let selected = getSelectedTextAndRange(editor);
-      let sha1 = new Sha1Command();
+      let sha1 = new HashCommand('sha1');
+      replaceText(editor, selected.range, sha1.run(selected.text));
+    })
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand('extension.sha256', () => {
+      let editor = getActiveEditor();
+      let selected = getSelectedTextAndRange(editor);
+      let sha1 = new HashCommand('sha256');
+      replaceText(editor, selected.range, sha1.run(selected.text));
+    })
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand('extension.sha512', () => {
+      let editor = getActiveEditor();
+      let selected = getSelectedTextAndRange(editor);
+      let sha1 = new HashCommand('sha512');
       replaceText(editor, selected.range, sha1.run(selected.text));
     })
   );
@@ -51,6 +69,24 @@ export function activate(context: ExtensionContext) {
       let editor = getActiveEditor();
       let selected = getSelectedTextAndRange(editor);
       let base64Decode = new Base64DecodeCommand();
+      replaceText(editor, selected.range, base64Decode.run(selected.text));
+    })
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand('extension.base64UrlEncode', () => {
+      let editor = getActiveEditor();
+      let selected = getSelectedTextAndRange(editor);
+      let base64Encode = new Base64UrlEncodeCommand();
+      replaceText(editor, selected.range, base64Encode.run(selected.text));
+    })
+  );
+
+  context.subscriptions.push(
+    commands.registerCommand('extension.base64UrlDecode', () => {
+      let editor = getActiveEditor();
+      let selected = getSelectedTextAndRange(editor);
+      let base64Decode = new Base64UrlDecodeCommand();
       replaceText(editor, selected.range, base64Decode.run(selected.text));
     })
   );
@@ -127,7 +163,7 @@ export function activate(context: ExtensionContext) {
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
 
 /**
  * Get vscode active editor
@@ -183,8 +219,8 @@ function hasSelectedText(selection: Selection) {
  * @param {Range} range
  * @param {string} newText - new text to replace
  */
-function replaceText(editor: TextEditor, range, newText: string) {
-  editor.edit(function(editBuilder) {
+function replaceText(editor: TextEditor, range: any, newText: string) {
+  editor.edit(function (editBuilder) {
     editBuilder.replace(range, newText);
   });
 }
@@ -195,7 +231,7 @@ function replaceText(editor: TextEditor, range, newText: string) {
 function insertText(editor: TextEditor, text: string) {
   const position = editor.selection.active;
 
-  editor.edit(function(editBuilder) {
+  editor.edit(function (editBuilder) {
     editBuilder.insert(position, text);
   });
 }

@@ -1,8 +1,7 @@
 {
-  "name": "vscode-hasher",
+  "name": "vscode-hasher-extended",
   "displayName": "Hasher",
-  "description":
-    "Generate various hash (md5, sha1), HTML entity conversion and many more",
+  "description": "Generate various hash (MD5, SHA-128, SHA-256, SHA-512), HTML entity conversion and many more",
   "version": "1.0.1",
   "publisher": "deerawan",
   "icon": "images/hasher.png",
@@ -11,23 +10,29 @@
     "theme": "dark"
   },
   "engines": {
-    "vscode": "^0.10.1"
+    "vscode": "^1.40.0"
   },
   "bugs": {
-    "url": "https://github.com/deerawan/vscode-hasher/issues",
-    "email": "deerawan@gmail.com"
+    "url": "https://github.com/espresso3389/vscode-hasher/issues",
+    "email": "espresso3389@gmail.com"
   },
-  "homepage": "https://github.com/deerawan/vscode-hasher",
+  "homepage": "https://github.com/espresso3389/vscode-hasher",
   "repository": {
     "type": "git",
-    "url": "https://github.com/deerawan/vscode-hasher"
+    "url": "https://github.com/espresso3389/vscode-hasher"
   },
-  "categories": ["Other"],
+  "categories": [
+    "Other"
+  ],
   "activationEvents": [
     "onCommand:extension.md5",
     "onCommand:extension.sha1",
+    "onCommand:extension.sha256",
+    "onCommand:extension.sha512",
     "onCommand:extension.base64Encode",
     "onCommand:extension.base64Decode",
+    "onCommand:extension.base64urlEncode",
+    "onCommand:extension.base64urlDecode",
     "onCommand:extension.uriEncodeComponent",
     "onCommand:extension.uriDecodeComponent",
     "onCommand:extension.uuidV1",
@@ -44,7 +49,15 @@
       },
       {
         "command": "extension.sha1",
-        "title": "Hasher: SHA1"
+        "title": "Hasher: SHA-128"
+      },
+      {
+        "command": "extension.sha256",
+        "title": "Hasher: SHA-256"
+      },
+      {
+        "command": "extension.sha512",
+        "title": "Hasher: SHA-512"
       },
       {
         "command": "extension.base64Encode",
@@ -53,6 +66,14 @@
       {
         "command": "extension.base64Decode",
         "title": "Hasher: Base64 Decode"
+      },
+      {
+        "command": "extension.base64UrlEncode",
+        "title": "Hasher: base64url Encode"
+      },
+      {
+        "command": "extension.base64UrlDecode",
+        "title": "Hasher: base64url Decode"
       },
       {
         "command": "extension.uriEncodeComponent",
@@ -83,31 +104,40 @@
   "scripts": {
     "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
     "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
-    "test":
-      "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec --ui tdd ./out/test/*.test.js",
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- -R spec --ui tdd ./out/test/*.test.js",
     "precommit": "lint-staged",
     "format": "prettier --write \"{src,test}/**/*.ts\"",
     "lint": "tslint -c tslint.json 'src/**/*.ts' 'test/**/*.ts' --fix"
   },
   "devDependencies": {
-    "coveralls": "^2.11.6",
-    "husky": "^0.14.3",
-    "istanbul": "^0.4.1",
-    "lint-staged": "^7.0.0",
-    "mocha": "^2.3.4",
-    "prettier": "^1.11.1",
-    "tslint": "^5.9.1",
-    "tslint-config-prettier": "^1.10.0",
-    "typescript": "^2.5.3",
-    "uuid-validate": "0.0.2",
-    "vscode": "0.10.x"
+    "@types/crypto-js": "^3.1.43",
+    "@types/node": "^13.9.1",
+    "@types/vscode": "^1.43.0",
+    "coveralls": "^3.0.9",
+    "istanbul": "^0.4.5",
+    "lint-staged": "^10.0.8",
+    "mocha": "^7.1.0",
+    "prettier": "^1.19.1",
+    "tslint": "^6.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3",
+    "uuid-validate": "0.0.3",
+    "vscode": "1.1.36"
   },
   "dependencies": {
-    "he": "^0.5.0",
-    "uuid": "^3.0.1"
+    "base64url": "^3.0.1",
+    "crypto-js": "^4.0.0",
+    "he": "^1.2.0",
+    "uuid": "^7.0.2"
   },
   "lint-staged": {
-    "*.{ts,json}": ["prettier --write", "git add"],
-    "*.ts": ["tslint --fix", "tslint"]
+    "*.{ts,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.ts": [
+      "tslint --fix",
+      "tslint"
+    ]
   }
 }

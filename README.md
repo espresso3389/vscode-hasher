@@ -2,6 +2,7 @@
 Generate various hash (md5, sha1), UUID, HTML entity conversion and many more. Features:
 - MD5
 - SHA1
+- SHA256
 - Base64 Encode
 - Base64 Decode
 - URI Encode Component
