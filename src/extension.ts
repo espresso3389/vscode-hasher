@@ -17,11 +17,13 @@ import { UuidV1Command } from './uuid-v1-command';
 import { UuidV4Command } from './uuid-v4-command';
 import { HtmlEntityEncodeCommand } from './html-entity-encode-command';
 import { HtmlEntityDecodeCommand } from './html-entity-decode-command';
+import { isNullOrUndefined } from 'util';
 
 export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand('extension.md5', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let md5 = new HashCommand('md5');
       replaceText(editor, selected.range, md5.run(selected.text));
@@ -30,7 +32,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.sha1', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let sha1 = new HashCommand('sha1');
       replaceText(editor, selected.range, sha1.run(selected.text));
@@ -39,7 +42,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.sha256', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let sha1 = new HashCommand('sha256');
       replaceText(editor, selected.range, sha1.run(selected.text));
@@ -48,7 +52,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.sha512', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let sha1 = new HashCommand('sha512');
       replaceText(editor, selected.range, sha1.run(selected.text));
@@ -57,7 +62,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.base64Encode', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let base64Encode = new Base64EncodeCommand();
       replaceText(editor, selected.range, base64Encode.run(selected.text));
@@ -66,7 +72,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.base64Decode', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let base64Decode = new Base64DecodeCommand();
       replaceText(editor, selected.range, base64Decode.run(selected.text));
@@ -75,7 +82,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.base64UrlEncode', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let base64Encode = new Base64UrlEncodeCommand();
       replaceText(editor, selected.range, base64Encode.run(selected.text));
@@ -84,7 +92,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.base64UrlDecode', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let base64Decode = new Base64UrlDecodeCommand();
       replaceText(editor, selected.range, base64Decode.run(selected.text));
@@ -93,7 +102,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.uriEncodeComponent', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let uriEncodeComponent = new UriEncodeComponentCommand();
       replaceText(
@@ -106,7 +116,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.uriDecodeComponent', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let uriDecodeComponent = new UriDecodeComponentCommand();
       replaceText(
@@ -119,7 +130,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.uuidV1', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let uuidV1Command = new UuidV1Command();
       insertText(editor, uuidV1Command.run());
@@ -128,7 +140,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.uuidV4', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let uuidV4Command = new UuidV4Command();
       insertText(editor, uuidV4Command.run());
@@ -137,7 +150,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.htmlEntityEncodeComponent', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let htmlEntityEncodeComponent = new HtmlEntityEncodeCommand();
       replaceText(
@@ -150,7 +164,8 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     commands.registerCommand('extension.htmlEntityDecodeComponent', () => {
-      let editor = getActiveEditor();
+      let editor = window.activeTextEditor;
+      if (isNullOrUndefined(editor)) { return; }
       let selected = getSelectedTextAndRange(editor);
       let htmlEntityDecodeComponent = new HtmlEntityDecodeCommand();
       replaceText(
@@ -164,20 +179,6 @@ export function activate(context: ExtensionContext) {
 
 // this method is called when your extension is deactivated
 export function deactivate() { }
-
-/**
- * Get vscode active editor
- *
- * @return {TextEditor}
- */
-function getActiveEditor(): TextEditor {
-  let editor = window.activeTextEditor;
-  if (!editor) {
-    return;
-  }
-
-  return editor;
-}
 
 /**
  * Get selected text and range
