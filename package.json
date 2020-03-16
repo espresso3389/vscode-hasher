@@ -2,7 +2,7 @@
   "name": "vscode-hasher-extended",
   "displayName": "Hasher",
   "description": "Generate various hash (MD5, SHA-128, SHA-256, SHA-512), HTML entity conversion and many more",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "publisher": "deerawan",
   "icon": "images/hasher.png",
   "galleryBanner": {
@@ -112,7 +112,7 @@
   "devDependencies": {
     "@types/crypto-js": "^3.1.43",
     "@types/node": "^13.9.1",
-    "@types/vscode": "^1.43.0",
+    "@types/vscode": "^1.40.0",
     "coveralls": "^3.0.9",
     "istanbul": "^0.4.5",
     "lint-staged": "^10.0.8",
