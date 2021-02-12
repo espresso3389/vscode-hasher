@@ -1,9 +1,3 @@
-# Change Log
+## 1.1.1
 
-All notable changes to the "vscode-hasher-extended" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-
-- Initial release
+* Update the things to run on latest VSCode
