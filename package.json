@@ -2,7 +2,7 @@
   "name": "vscode-hasher-extended",
   "displayName": "vscode-hasher-extended",
   "description": "Generate various hash (MD5, SHA-128, SHA-256, SHA-512), HTML entity conversion and many more",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "publisher": "espresso3389",
   "icon": "images/hasher.png",
   "galleryBanner": {
@@ -10,7 +10,7 @@
     "theme": "dark"
   },
   "engines": {
-    "vscode": "^1.43.0"
+    "vscode": "^1.53.0"
   },
   "bugs": {
     "url": "https://github.com/espresso3389/vscode-hasher/issues",
@@ -20,6 +20,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/espresso3389/vscode-hasher"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
   },
   "categories": [
     "Other"
